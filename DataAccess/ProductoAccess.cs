@@ -1,7 +1,7 @@
-﻿using CuarzoTest_Paz.Models.DB;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
 
-namespace CuarzoTest_Paz.DataAccess;
+namespace DataAccess;
 
 public class ProductoAccess
 {

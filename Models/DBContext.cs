@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CuarzoTest_Paz.Models.DB;
+namespace Models;
 
 public partial class DBContext : DbContext
 {

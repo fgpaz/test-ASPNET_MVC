@@ -1,4 +1,4 @@
-﻿namespace CuarzoTest_Paz.Models.DB;
+﻿namespace Models;
 
 public sealed class Categoria
 {

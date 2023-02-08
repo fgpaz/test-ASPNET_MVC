@@ -1,5 +1,5 @@
-using CuarzoTest_Paz.Models.DB;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

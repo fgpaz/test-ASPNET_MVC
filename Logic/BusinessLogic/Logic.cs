@@ -1,7 +1,7 @@
-﻿using CuarzoTest_Paz.DataAccess;
-using CuarzoTest_Paz.Models.DB;
+﻿using DataAccess;
+using Models;
 
-namespace CuarzoTest_Paz.Business;
+namespace Logic;
 
 public class Logic
 {
