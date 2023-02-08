@@ -1,0 +1,43 @@
+﻿@model List<Models.Producto>;
+
+@{
+    ViewBag.Title = "Productos";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    Tabla Productos
+    <div style="overflow: auto;" class="row">
+        <div class="container">
+            <table class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">ID</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Nombre</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Precio</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Categoría</p>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var producto in Model)
+                {
+                    <tr>
+                        <td style="font-size: 15px; font-weight: 600;">@producto.IdProducto</td>
+                        <td style="font-size: 15px; font-weight: 600;">@producto.NombreProducto</td>
+                        <td style="font-size: 15px; font-weight: 600;">@producto.Precio</td>
+                        <td style="text-align:center">@(producto.Categoria!.NombreCategoria ?? "Sin Nombre")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

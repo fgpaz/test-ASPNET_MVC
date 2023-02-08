@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuarzoTest_Paz", "CuarzoTest_Paz\CuarzoTest_Paz.csproj", "{CE31ACD7-E970-4B07-BB18-F9BF4A858E5D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{CE31ACD7-E970-4B07-BB18-F9BF4A858E5D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CuarzoTest_Paz.Logic", "CuarzoTest_Paz.Logic", "{A2D3387E-BE9F-4CDF-9D56-2D75A99D9A28}"
 EndProject

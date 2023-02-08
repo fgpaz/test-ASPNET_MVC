@@ -21,18 +21,21 @@ public class ProductoAccess
     {
         return await _context.Set<Producto>()
             .Where(producto => producto.Categoria.IdCategoria == IdCategoria)
+            .Include(p => p.Categoria)
             .ToListAsync();
     }
 
     public async Task<List<Producto>> GetAllProductos()
     {
-        return await _context.Producto.Select(p => new Producto
-        {
-            IdProducto = p.IdProducto,
-            NombreProducto = p.NombreProducto,
-            Precio = p.Precio, IdCategoria = p.IdCategoria,
-            Categoria = p.Categoria,
-        }).ToListAsync();
+        return await _context.Producto
+            .Include(p => p.Categoria)
+            .Select(p => new Producto
+            {
+                IdProducto = p.IdProducto,
+                NombreProducto = p.NombreProducto,
+                Precio = p.Precio, IdCategoria = p.IdCategoria,
+                Categoria = p.Categoria
+            }).ToListAsync();
     }
 
     public void Update(Producto producto)
