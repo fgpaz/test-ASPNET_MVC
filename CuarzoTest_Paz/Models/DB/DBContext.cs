@@ -2,13 +2,13 @@
 
 namespace CuarzoTest_Paz.Models.DB;
 
-public partial class BdcrudTestContext : DbContext
+public partial class DBContext : DbContext
 {
-    public BdcrudTestContext()
+    public DBContext()
     {
     }
 
-    public BdcrudTestContext(DbContextOptions<BdcrudTestContext> options)
+    public DBContext(DbContextOptions<DBContext> options)
         : base(options)
     {
     }

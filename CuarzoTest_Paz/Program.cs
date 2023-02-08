@@ -11,7 +11,7 @@ builder.Configuration.AddJsonFile("appsettings.json", true, true);
 #region Connection to Database
 
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
-builder.Services.AddDbContext<BdcrudTestContext>(options =>
+builder.Services.AddDbContext<DBContext>(options =>
     options.UseSqlServer(connectionString));
 
 #endregion
