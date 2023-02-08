@@ -1,3 +1,5 @@
+using DataAccess;
+using Logic;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -10,7 +12,7 @@ builder.Configuration.AddJsonFile("appsettings.json", true, true);
 
 #region Connection to Database
 
-var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+var connectionString = builder.Configuration.GetConnectionString("LOCAL_DB");
 builder.Services.AddDbContext<DBContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -18,6 +20,10 @@ builder.Services.AddDbContext<DBContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<CategoriaAccess>();
+builder.Services.AddScoped<ProductoAccess>();
+builder.Services.AddScoped<CoreLogic>();
 
 var app = builder.Build();
 
