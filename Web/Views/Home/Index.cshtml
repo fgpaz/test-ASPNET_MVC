@@ -3,24 +3,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 
-
-<div class="mb-4 col-xl-3 col-md-6 sep_top">
-    <a href="@Url.Action("TablaProductos", "Productos")">
-        <div class="card-widget  h-100">
-            <div class="card-widget-body">
-                <div class="dot me-3 bg-indigo"></div>
-                <div class="text">
-                    <h6 class="mb-0">Productos</h6>
-                </div>
+<div class="row">
+    <div class="col-12">
+        <div class="box row">
+            <div class="mb-4 col-xl-3 col-md-6 sep_top">
+                <a href="@Url.Action("TablaProductos", "Productos")">
+                    <div class="card-widget  h-100">
+                        <div class="card-widget-body">
+                            <div class="dot me-3 bg-indigo"></div>
+                            <div class="text">
+                                <h6 class="mb-0">Productos</h6>
+                            </div>
+                        </div>
+                        <div class="icon text-white bg-indigo">
+                            <i class="far fa-user icono-navbar icon-home" style="margin-left: 1px; font-weight:100"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="icon text-white bg-indigo">
-                <i class="far fa-user icono-navbar icon-home" style="margin-left: 1px; font-weight:100"></i>
+            <div class="mb-4 col-xl-3 col-md-6 sep_top">
+                <a href="@Url.Action("Categorias", "Categorias")">
+                    <div class="card-widget  h-100">
+                        <div class="card-widget-body">
+                            <div class="dot me-3 bg-indigo"></div>
+                            <div class="text">
+                                <h6 class="mb-0">Categorías</h6>
+                            </div>
+                        </div>
+                        <div class="icon text-white bg-indigo">
+                            <i class="far fa-user icono-navbar icon-home" style="margin-left: 1px; font-weight:100"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-    </a>
+    </div>
+
 </div>
