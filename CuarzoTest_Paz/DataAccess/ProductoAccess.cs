@@ -17,10 +17,10 @@ public class ProductoAccess
         _context.Add(producto);
     }
 
-    public async Task<List<Producto?>> GetProductosByCategoria(List<int> listIdCategoria)
+    public async Task<List<Producto?>> GetProductosByCategoria(int IdCategoria)
     {
         return await _context.Set<Producto>()
-            .Where(producto => listIdCategoria.Contains(producto.Categoria.IdCategoria))
+            .Where(producto => producto.Categoria.IdCategoria == IdCategoria)
             .ToListAsync();
     }
 
