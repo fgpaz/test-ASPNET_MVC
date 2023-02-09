@@ -1,0 +1,88 @@
+﻿@model System.Collections.Generic.List<Models.Categoria>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<link href="~/views/BotonActivo.css" rel="stylesheet"/>
+
+<link href="~/views/Categorias/Categorias.css" rel="stylesheet"/>
+
+<div class="container contenedor">
+
+    <div class="row">
+        <div class="col-6">
+            <a class="btn btn-light" href="@Url.Action("Index", "Home")" style="margin-bottom: 10px; font-weight: bold;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                </svg>
+                Volver
+            </a>
+        </div>
+        <div class="col-6" style="text-align: right;">
+            <a id="createCategoria" class="btn btn-primary"
+               asp-controller="Categorias"
+               asp-action="SearchCategoria"
+               asp-route-id="0">
+                Nueva Categoría
+            </a>
+        </div>
+    </div>
+
+    <div style="overflow: auto;" class="row">
+        <div class="container">
+            <table id="tablaCategorias" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">ID</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Categoría</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Activo</p>
+                    </th>
+                    <th scope="col" style="font-size: 17px;">
+                        <p class="d-flex justify-content-center">Acción</p>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var categoria in Model)
+                {
+                    <tr>
+                        <td style="font-size: 15px; font-weight: 600;">@categoria.IdCategoria</td>
+                        <td style="font-size: 15px; font-weight: 600;">@categoria.NombreCategoria</td>
+                        <td style="text-align:center">
+                            <label class="switch ">
+                                <input type="checkbox" @(categoria.EsActiva
+                                                           ? "checked='checked'"
+                                                           : "") disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td class="justify-content-center">
+                            <div class="d-flex">
+                                <a class="btn btn-secondary botonFila" asp-action="SearchCategoria"
+                                   asp-route-id="@categoria.IdCategoria">
+                                    Editar
+                                </a>
+                                <a class="btn btn-danger botonFila" asp-action="EliminarCategoria"
+                                   asp-route-id="@categoria.IdCategoria">
+                                    Eliminar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/views/Categorias/Categorias.js"></script>
+}
