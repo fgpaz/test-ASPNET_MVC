@@ -5,8 +5,15 @@
     Layout = "_Layout";
 }
 
-<div class="container">
-    Tabla Productos
+<div class="container contenedor">
+    <div class="col-6">
+        <a class="btn btn-light" href="@Url.Action("Index", "Home")" style="margin-bottom: 10px; font-weight: bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+            </svg>
+            Volver
+        </a>
+    </div>
     <div style="overflow: auto;" class="row">
         <div class="container">
             <table class="table table-striped table-bordered" style="width:100%">
@@ -32,8 +39,11 @@
                     <tr>
                         <td style="font-size: 15px; font-weight: 600;">@producto.IdProducto</td>
                         <td style="font-size: 15px; font-weight: 600;">@producto.NombreProducto</td>
-                        <td style="font-size: 15px; font-weight: 600;">@producto.Precio</td>
-                        <td style="text-align:center">@(producto.Categoria!.NombreCategoria ?? "Sin Nombre")</td>
+                        <td style="font-size: 15px; font-weight: 600;">
+                            @producto.Precio
+                            <span style="font-size: 12px; font-weight: 400;">(USD/.oz)</span>
+                        </td>
+                        <td style="text-align:center">@(producto.Categoria!.NombreCategoria ?? "*Categoría sin nombre")</td>
                     </tr>
                 }
                 </tbody>
