@@ -15,8 +15,13 @@ public class CategoriaAccess
     public void Create(Categoria categoria)
     {
         _context.Add(categoria);
+        _context.SaveChanges();
     }
 
+    public async Task<Categoria?> GetCategoria(int idCategoria)
+        => await _context.Categoria
+            .FirstOrDefaultAsync(
+                c => c.IdCategoria == idCategoria);
 
     public async Task<List<Categoria>> GetAllCategorias()
     {
@@ -31,10 +36,12 @@ public class CategoriaAccess
     public void Update(Categoria categoria)
     {
         _context.Update(categoria);
+        _context.SaveChanges();
     }
 
     public void Delete(Categoria categoria)
     {
         _context.Remove(categoria);
+        _context.SaveChanges();
     }
 }

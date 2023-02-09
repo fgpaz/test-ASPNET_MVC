@@ -15,6 +15,7 @@ public class ProductoAccess
     public void Create(Producto producto)
     {
         _context.Add(producto);
+        _context.SaveChanges();
     }
 
     public async Task<List<Producto?>> GetProductosByCategoria(int IdCategoria)
@@ -41,10 +42,12 @@ public class ProductoAccess
     public void Update(Producto producto)
     {
         _context.Update(producto);
+        _context.SaveChanges();
     }
 
     public void Delete(Producto producto)
     {
         _context.Remove(producto);
+        _context.SaveChanges();
     }
 }
