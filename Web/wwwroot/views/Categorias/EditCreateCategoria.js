@@ -8,7 +8,7 @@ $(window).resize(function () {
 
 $("#btnGuardar").click(function (e) {
     e.preventDefault();
-    
+
     let nombreCategoria = $("#nombreCategoria").val();
 
     let form = $("#formEditCategoria");

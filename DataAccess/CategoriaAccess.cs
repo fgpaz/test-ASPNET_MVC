@@ -19,9 +19,11 @@ public class CategoriaAccess
     }
 
     public async Task<Categoria?> GetCategoria(int idCategoria)
-        => await _context.Categoria
+    {
+        return await _context.Categoria
             .FirstOrDefaultAsync(
                 c => c.IdCategoria == idCategoria);
+    }
 
     public async Task<List<Categoria>> GetAllCategorias()
     {

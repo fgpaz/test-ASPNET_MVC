@@ -36,9 +36,9 @@ public class CategoriasController : Controller
             var searchedCategoria = await _logic.GetCategoria(id);
             if (searchedCategoria is null)
                 throw new HttpRequestException(
-                    message: "Categoria not found",
-                    inner: null,
-                    statusCode: HttpStatusCode.NotFound);
+                    "Categoria not found",
+                    null,
+                    HttpStatusCode.NotFound);
 
             return View("EditCreateCategoria", new Categoria
             {
@@ -49,24 +49,7 @@ public class CategoriasController : Controller
         }
         catch (HttpRequestException e)
         {
-            switch (e.StatusCode)
-            {
-                case HttpStatusCode.NotFound:
-                {
-                    return View("EditCreateCategoria", new Categoria
-                    {
-                        IdCategoria = 0, // if id=0, a new one was created
-                        EsActiva = false,
-                        NombreCategoria = null
-                    });
-                }
-
-                case HttpStatusCode.InternalServerError:
-                    return BadRequest(e.Message);
-
-                default:
-                    return BadRequest(e.Message);
-            }
+            return BadRequest(e.Message);
         }
     }
 
@@ -86,9 +69,9 @@ public class CategoriasController : Controller
         try
         {
             if (categoria.IdCategoria == 0)
-                _logic.Usp_Ins_Co_Categoria(categoria: categoria);
+                _logic.Usp_Ins_Co_Categoria(categoria);
             else
-                _logic.UpdateCategoria(categoria: categoria);
+                _logic.UpdateCategoria(categoria);
         }
         catch (Exception e)
         {
@@ -100,13 +83,12 @@ public class CategoriasController : Controller
     }
 
 
-    
     [Route("EliminarCategoria/{id:int}")]
     public async Task<IActionResult> EliminarCategoria([FromRoute] int id)
     {
         try
         {
-            await _logic.DeleteCategoria(idCategoria: id);
+            await _logic.DeleteCategoria(id);
         }
         catch (HttpRequestException e)
         {

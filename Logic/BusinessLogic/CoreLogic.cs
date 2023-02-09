@@ -20,16 +20,17 @@ public class CoreLogic
     /// <summary> Obtains all 'Productos' associated to an Categoria's ID </summary>
     /// <returns>List(Producto)</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if NotFound:</code>-> StatusCode = 404 </exception>
+    ///     <code>if NotFound:</code>-> StatusCode = 404
+    /// </exception>
     private async Task<List<Producto?>> Usp_Sel_Co_Productos(int IdCategoria)
     {
         var productos = await _productoAccess.GetProductosByCategoria(IdCategoria);
 
         if (productos is null)
             throw new HttpRequestException(
-                message: "No Producto to show",
-                inner: null,
-                statusCode: HttpStatusCode.NotFound);
+                "No Producto to show",
+                null,
+                HttpStatusCode.NotFound);
 
         return productos;
     }
@@ -54,39 +55,43 @@ public class CoreLogic
     /// <summary> Gets all 'Categorias' </summary>
     /// <returns>List(Categoria)</returns>
     public async Task<List<Categoria>> GetAllCategorias()
-        => await _categoriaAccess.GetAllCategorias();
+    {
+        return await _categoriaAccess.GetAllCategorias();
+    }
 
     /// <summary> Obtains a 'Categoria' by its id </summary>
     /// <param name="idCategoria"></param>
     /// <returns>if it succeed returns the 'Categoria'</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if NotFound:</code>-> StatusCode = 404
-    /// <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500 </exception>
+    ///     <code>if NotFound:</code>-> StatusCode = 404
+    ///     <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500
+    /// </exception>
     public async Task<Categoria?> GetCategoria(int idCategoria)
     {
         try
         {
-            var categoria = await _categoriaAccess.GetCategoria(idCategoria: idCategoria);
+            var categoria = await _categoriaAccess.GetCategoria(idCategoria);
             if (categoria is null)
                 throw new HttpRequestException(
-                    message: "Categoria not found",
-                    inner: null,
-                    statusCode: HttpStatusCode.NotFound);
+                    "Categoria not found",
+                    null,
+                    HttpStatusCode.NotFound);
             return categoria;
         }
         catch (Exception e)
         {
             throw new HttpRequestException(
-                message: $"{e.Message}",
-                inner: null,
-                statusCode: HttpStatusCode.InternalServerError);
+                $"{e.Message}",
+                null,
+                HttpStatusCode.InternalServerError);
         }
     }
 
     /// <summary> Creates a new Categoria </summary>
     /// <returns>if it succeed returns the Created'Categoria'</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500 </exception>
+    ///     <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500
+    /// </exception>
     public Categoria Usp_Ins_Co_Categoria(Categoria categoria)
     {
         try
@@ -97,9 +102,9 @@ public class CoreLogic
         catch (Exception e)
         {
             throw new HttpRequestException(
-                message: $"{e.Message}",
-                inner: null,
-                statusCode: HttpStatusCode.InternalServerError);
+                $"{e.Message}",
+                null,
+                HttpStatusCode.InternalServerError);
         }
     }
 
@@ -108,49 +113,53 @@ public class CoreLogic
     /// <param name="categoria"></param>
     /// <returns>if it succeed returns the Updated 'Categoria'</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500</exception>
+    ///     <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500
+    /// </exception>
     public Categoria UpdateCategoria(Categoria categoria)
     {
         try
         {
-            _categoriaAccess.Update(categoria: categoria);
+            _categoriaAccess.Update(categoria);
             return categoria;
         }
         catch (Exception e)
         {
             throw new HttpRequestException(
-                message: $"{e.Message}",
-                inner: null,
-                statusCode: HttpStatusCode.InternalServerError);
+                $"{e.Message}",
+                null,
+                HttpStatusCode.InternalServerError);
         }
     }
 
-    /// <summary> Recieves an idCategoria, searches it in the Database
-    /// and tries to delete the corresponding 'Categoria'</summary>
+    /// <summary>
+    ///     Recieves an idCategoria, searches it in the Database
+    ///     and tries to delete the corresponding 'Categoria'
+    /// </summary>
     /// <param name="idCategoria"></param>
     /// <exception cref="HttpRequestException">
-    /// <code>if NotFound:</code>-> StatusCode = 404
-    /// <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500 </exception>
+    ///     <code>if NotFound:</code>-> StatusCode = 404
+    ///     <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500
+    /// </exception>
     public async Task DeleteCategoria(int idCategoria)
     {
-        var categoria = await _categoriaAccess.GetCategoria(idCategoria: idCategoria);
+        var categoria = await _categoriaAccess.GetCategoria(idCategoria);
 
         if (categoria is null)
             throw new HttpRequestException(
-                message: "Categoria not found",
-                inner: null,
-                statusCode: HttpStatusCode.NotFound);
+                "Categoria not found",
+                null,
+                HttpStatusCode.NotFound);
 
         try
         {
-            _categoriaAccess.Delete(categoria: categoria);
+            _categoriaAccess.Delete(categoria);
         }
         catch (Exception e)
         {
             throw new HttpRequestException(
-                message: $"{e.Message}",
-                inner: null,
-                statusCode: HttpStatusCode.InternalServerError);
+                $"{e.Message}",
+                null,
+                HttpStatusCode.InternalServerError);
         }
     }
 

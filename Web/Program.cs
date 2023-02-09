@@ -21,9 +21,13 @@ builder.Services.AddDbContext<DBContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#region Dependency Injection
+
 builder.Services.AddScoped<CategoriaAccess>();
 builder.Services.AddScoped<ProductoAccess>();
 builder.Services.AddScoped<CoreLogic>();
+
+#endregion
 
 var app = builder.Build();
 
