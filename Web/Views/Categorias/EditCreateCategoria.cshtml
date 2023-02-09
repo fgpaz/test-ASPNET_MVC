@@ -1,0 +1,65 @@
+﻿@model Models.Categoria
+
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="row box">
+    @{ ViewBag.Title = Model.IdCategoria == 0
+           ? "Nueva Categoría"
+           : "Edición de Categoría"; }
+</div>
+
+<link href="~/views/BotonActivo.css" rel="stylesheet"/>
+<link href="~/views/Categorias/EditCreateCategoria.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="my-2">
+            <div id="alertPlaceholder"></div>
+        </div>
+    </div>
+</div>
+
+
+<form action="@Url.Content("~/Categorias/EditCreateCategoria")" 
+       method="post"
+      id="formEditCategoria">
+
+    <div>
+        <h3 class="titulo"> @ViewBag.Title</h3>
+    </div>
+
+    <label asp-for="IdCategoria" hidden="hidden"></label>
+    <input asp-for="IdCategoria" hidden="hidden" id="idCategoria" class="form-control" placeholder=""/>
+
+    <div class="row justify-content-center fila">
+        <div class="col-md-3 col-lg-3">
+            <label asp-for="NombreCategoria" style="margin-right:10px">Nombre de Categoría*</label>
+            <input asp-for="NombreCategoria" id="nombreCategoria" class="form-control" placeholder="Nombre de Categoría"/>
+        </div>
+
+        <div class="col-md-1 col-lg-1 ">
+            <label asp-for="EsActiva" style="margin-right:10px">Activo</label><br/>
+            <label asp-for="EsActiva" style=" margin-top: 0.3rem;" class="switch">
+                <input type="checkbox" asp-for="EsActiva" class="custom-control-input"/>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="box">
+            <div class="justify-content-center fila">
+                <a href="@Url.Action("Categorias", "Categorias")" class="btn btn-secondary">Cancelar</a>
+                <input style="margin-right: 6rem" id="btnGuardar" type="submit" value="Guardar" class="btn btn-primary"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="~/views/Categorias/EditCreateCategoria.js"></script>
+}
