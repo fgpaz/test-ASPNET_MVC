@@ -102,11 +102,11 @@ public class CategoriasController : Controller
 
     
     [Route("EliminarCategoria/{id:int}")]
-    public async Task<IActionResult> EliminarCategoria([FromRoute] int idCategoria)
+    public async Task<IActionResult> EliminarCategoria([FromRoute] int id)
     {
         try
         {
-            await _logic.DeleteCategoria(idCategoria: idCategoria);
+            await _logic.DeleteCategoria(idCategoria: id);
         }
         catch (HttpRequestException e)
         {

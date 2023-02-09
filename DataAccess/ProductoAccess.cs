@@ -20,10 +20,10 @@ public class ProductoAccess
 
     public async Task<List<Producto?>> GetProductosByCategoria(int IdCategoria)
     {
-        return await _context.Set<Producto>()
+        return (await _context.Set<Producto>()
             .Where(producto => producto.Categoria.IdCategoria == IdCategoria)
             .Include(p => p.Categoria)
-            .ToListAsync();
+            .ToListAsync())!;
     }
 
     public async Task<List<Producto>> GetAllProductos()
