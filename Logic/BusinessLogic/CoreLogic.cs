@@ -15,11 +15,12 @@ public class CoreLogic
         _categoriaAccess = categoriaAccess;
     }
 
+    #region Producto
+
     /// <summary> Obtains all 'Productos' associated to an Categoria's ID </summary>
     /// <returns>List(Producto)</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if NotFound:</code>-> StatusCode = 404
-    /// </exception>
+    /// <code>if NotFound:</code>-> StatusCode = 404 </exception>
     private async Task<List<Producto?>> Usp_Sel_Co_Productos(int IdCategoria)
     {
         var productos = await _productoAccess.GetProductosByCategoria(IdCategoria);
@@ -46,15 +47,32 @@ public class CoreLogic
         return productos!;
     }
 
-    /// <summary> Creates a new Categoria </summary>
+    #endregion
+
+    #region Categoria
+
+    /// <summary> Gets all 'Categorias' </summary>
+    /// <returns>List(Categoria)</returns>
+    public async Task<List<Categoria>> GetAllCategorias()
+        => await _categoriaAccess.GetAllCategorias();
+
+    /// <summary> Obtains a 'Categoria' by its id </summary>
+    /// <param name="idCategoria"></param>
+    /// <returns>if it succeed returns the 'Categoria'</returns>
     /// <exception cref="HttpRequestException">
-    /// <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500
-    /// </exception>
-    public void Usp_Ins_Co_Categoria(Categoria categoria)
+    /// <code>if NotFound:</code>-> StatusCode = 404
+    /// <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500 </exception>
+    public async Task<Categoria?> GetCategoria(int idCategoria)
     {
         try
         {
-            _categoriaAccess.Create(categoria);
+            var categoria = await _categoriaAccess.GetCategoria(idCategoria: idCategoria);
+            if (categoria is null)
+                throw new HttpRequestException(
+                    message: "Categoria not found",
+                    inner: null,
+                    statusCode: HttpStatusCode.NotFound);
+            return categoria;
         }
         catch (Exception e)
         {
@@ -65,19 +83,55 @@ public class CoreLogic
         }
     }
 
-    /// <summary> Gets all 'Categorias' </summary>
-    /// <returns>List(Categoria)</returns>
-    public async Task<List<Categoria>> GetAllCategorias()
-        => await _categoriaAccess.GetAllCategorias();
+    /// <summary> Creates a new Categoria </summary>
+    /// <returns>if it succeed returns the Created'Categoria'</returns>
+    /// <exception cref="HttpRequestException">
+    /// <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500 </exception>
+    public Categoria Usp_Ins_Co_Categoria(Categoria categoria)
+    {
+        try
+        {
+            _categoriaAccess.Create(categoria);
+            return categoria;
+        }
+        catch (Exception e)
+        {
+            throw new HttpRequestException(
+                message: $"{e.Message}",
+                inner: null,
+                statusCode: HttpStatusCode.InternalServerError);
+        }
+    }
+
+
+    /// <summary> Updates an existing 'Categoria </summary>
+    /// <param name="categoria"></param>
+    /// <returns>if it succeed returns the Updated 'Categoria'</returns>
+    /// <exception cref="HttpRequestException">
+    /// <code>if there's a problem in the action of creating a 'Categoria':</code> -> StatusCode = 500</exception>
+    public Categoria UpdateCategoria(Categoria categoria)
+    {
+        try
+        {
+            _categoriaAccess.Update(categoria: categoria);
+            return categoria;
+        }
+        catch (Exception e)
+        {
+            throw new HttpRequestException(
+                message: $"{e.Message}",
+                inner: null,
+                statusCode: HttpStatusCode.InternalServerError);
+        }
+    }
 
     /// <summary> Recieves an idCategoria, searches it in the Database
-    /// and tries to delete the corresponding 'Categoria'. </summary>
+    /// and tries to delete the corresponding 'Categoria'</summary>
     /// <param name="idCategoria"></param>
     /// <exception cref="HttpRequestException">
     /// <code>if NotFound:</code>-> StatusCode = 404
-    /// <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500
-    /// </exception>
-    public async Task EliminarCategoria(int idCategoria)
+    /// <code>if there's a problem in the action of deleting a 'Categoria':</code> -> StatusCode = 500 </exception>
+    public async Task DeleteCategoria(int idCategoria)
     {
         var categoria = await _categoriaAccess.GetCategoria(idCategoria: idCategoria);
 
@@ -99,4 +153,6 @@ public class CoreLogic
                 statusCode: HttpStatusCode.InternalServerError);
         }
     }
+
+    #endregion
 }
